@@ -18,7 +18,7 @@ var page_not_found_component_1 = require("./page-not-found.component");
 var product_module_1 = require("./products/product.module");
 var user_module_1 = require("./user/user.module");
 var message_module_1 = require("./messages/message.module");
-var router_1 = require("@angular/router");
+var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,11 +33,7 @@ AppModule = __decorate([
             product_module_1.ProductModule,
             user_module_1.UserModule,
             message_module_1.MessageModule,
-            router_1.RouterModule.forRoot([
-                { path: "welcome", component: welcome_component_1.WelcomeComponent },
-                { path: "", redirectTo: "welcome", pathMatch: "full" },
-                { path: "**", component: page_not_found_component_1.PageNotFoundComponent }
-            ])
+            app_routing_module_1.AppRoutingModule
         ],
         declarations: [
             app_component_1.AppComponent,
