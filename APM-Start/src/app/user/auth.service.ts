@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { IUser } from './user';
 import { MessageService } from '../messages/message.service';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthService {
     currentUser: IUser;
 
-    constructor(private messageService: MessageService) { }
+    constructor(private messageService: MessageService,
+                private router: Router) { }
 
     isLoggedIn(): boolean {
         return !!this.currentUser;
@@ -37,5 +39,6 @@ export class AuthService {
 
     logout(): void {
         this.currentUser = null;
+        this.router.navigate(['/welcome']);
     }
 }

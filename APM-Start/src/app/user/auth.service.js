@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var message_service_1 = require("../messages/message.service");
+var router_1 = require("@angular/router");
 var AuthService = (function () {
-    function AuthService(messageService) {
+    function AuthService(messageService, router) {
         this.messageService = messageService;
+        this.router = router;
     }
     AuthService.prototype.isLoggedIn = function () {
         return !!this.currentUser;
@@ -40,12 +42,14 @@ var AuthService = (function () {
     };
     AuthService.prototype.logout = function () {
         this.currentUser = null;
+        this.router.navigate(['/welcome']);
     };
     return AuthService;
 }());
 AuthService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [message_service_1.MessageService])
+    __metadata("design:paramtypes", [message_service_1.MessageService,
+        router_1.Router])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

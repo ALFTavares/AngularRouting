@@ -31,3 +31,11 @@ ProductModule = __decorate([
             product_detail_component_1.ProductDetailComponent,
             product_edit_component_1.ProductEditComponent,
             product_filter_pipe_1.ProductFilterPipe
+        ],
+        providers: [
+            product_service_1.ProductService
+        ]
+    })
+], ProductModule);
+exports.ProductModule = ProductModule;
+//# sourceMappingURL=product.module.js.map

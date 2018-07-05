@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var auth_service_1 = require("./auth.service");
+var router_1 = require("@angular/router");
 var LoginComponent = (function () {
-    function LoginComponent(authService) {
+    function LoginComponent(authService, router) {
         this.authService = authService;
+        this.router = router;
         this.pageTitle = 'Log In';
     }
     LoginComponent.prototype.login = function (loginForm) {
@@ -20,6 +22,7 @@ var LoginComponent = (function () {
             var userName = loginForm.form.value.userName;
             var password = loginForm.form.value.password;
             this.authService.login(userName, password);
+            this.router.navigate(['/products']);
         }
         else {
             this.errorMessage = 'Please enter a user name and password.';
@@ -32,7 +35,8 @@ LoginComponent = __decorate([
     core_1.Component({
         templateUrl: './app/user/login.component.html'
     }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService,
+        router_1.Router])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map
