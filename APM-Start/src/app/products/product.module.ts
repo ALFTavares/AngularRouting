@@ -25,8 +25,8 @@ import {ProductEditTagsComponent} from "./product-edit-tags.component";
                 resolve: { product: ProductResolver },
                 children: [
                     { path: '', redirectTo: 'info', pathMatch: 'full' },
-                    { path: '', component: ProductEditInfoComponent },
-                    { path: '', component: ProductEditTagsComponent }
+                    { path: 'info', component: ProductEditInfoComponent },
+                    { path: 'tags', component: ProductEditTagsComponent }
 
                 ]
             }

@@ -34,8 +34,8 @@ ProductModule = __decorate([
                     resolve: { product: product_resolver_service_1.ProductResolver },
                     children: [
                         { path: '', redirectTo: 'info', pathMatch: 'full' },
-                        { path: '', component: product_edit_info_component_1.ProductEditInfoComponent },
-                        { path: '', component: product_edit_tags_component_1.ProductEditTagsComponent }
+                        { path: 'info', component: product_edit_info_component_1.ProductEditInfoComponent },
+                        { path: 'tags', component: product_edit_tags_component_1.ProductEditTagsComponent }
                     ]
                 }
             ])
