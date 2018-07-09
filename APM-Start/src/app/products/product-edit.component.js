@@ -11,12 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var message_service_1 = require("../messages/message.service");
 var product_service_1 = require("./product.service");
+var router_1 = require("@angular/router");
 var ProductEditComponent = (function () {
-    function ProductEditComponent(productService, messageService) {
+    function ProductEditComponent(productService, messageService, route, router) {
         this.productService = productService;
         this.messageService = messageService;
+        this.route = route;
+        this.router = router;
         this.pageTitle = 'Product Edit';
     }
+    ProductEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) { return _this.getProduct(+params['id']); });
+    };
     ProductEditComponent.prototype.getProduct = function (id) {
         var _this = this;
         this.productService.getProduct(id)
@@ -58,7 +65,7 @@ var ProductEditComponent = (function () {
         if (message) {
             this.messageService.addMessage(message);
         }
-        // Navigate back to the product list
+        this.router.navigate(['/products']);
     };
     return ProductEditComponent;
 }());
@@ -68,7 +75,9 @@ ProductEditComponent = __decorate([
         styleUrls: ['./app/products/product-edit.component.css']
     }),
     __metadata("design:paramtypes", [product_service_1.ProductService,
-        message_service_1.MessageService])
+        message_service_1.MessageService,
+        router_1.ActivatedRoute,
+        router_1.Router])
 ], ProductEditComponent);
 exports.ProductEditComponent = ProductEditComponent;
 //# sourceMappingURL=product-edit.component.js.map
