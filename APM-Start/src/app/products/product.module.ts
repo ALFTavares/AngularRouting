@@ -10,6 +10,8 @@ import {ProductService} from './product.service';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from "@angular/router";
 import {ProductResolver} from "./product-resolver.service";
+import {ProductEditInfoComponent} from "./product-edit-info.component";
+import {ProductEditTagsComponent} from "./product-edit-tags.component";
 
 @NgModule({
     imports: [
@@ -17,14 +19,26 @@ import {ProductResolver} from "./product-resolver.service";
         RouterModule.forChild([
             { path: "products", component: ProductListComponent },
             { path: "products/:id", component: ProductDetailComponent, resolve: { product: ProductResolver } },
-            { path: "products/:id/edit", component: ProductEditComponent, resolve: { product: ProductResolver } }
+            {
+                path: "products/:id/edit",
+                component: ProductEditComponent,
+                resolve: { product: ProductResolver },
+                children: [
+                    { path: '', redirectTo: 'info', pathMatch: 'full' },
+                    { path: '', component: ProductEditInfoComponent },
+                    { path: '', component: ProductEditTagsComponent }
+
+                ]
+            }
         ])
     ],
     declarations: [
         ProductListComponent,
         ProductDetailComponent,
         ProductEditComponent,
-        ProductFilterPipe
+        ProductFilterPipe,
+        ProductEditInfoComponent,
+        ProductEditTagsComponent
     ],
     providers: [
         ProductService,
