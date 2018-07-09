@@ -53,9 +53,18 @@ var ProductEditComponent = (function () {
             }
         }
     };
+    ProductEditComponent.prototype.isValid = function (path) {
+        var _this = this;
+        this.validate();
+        if (path)
+            return this.dataIsValid[path];
+        return (this.dataIsValid && Object.keys(this.dataIsValid).every(function (d) {
+            return _this.dataIsValid[d] === true;
+        }));
+    };
     ProductEditComponent.prototype.saveProduct = function () {
         var _this = this;
-        if (true === true) {
+        if (this.isValid(null)) {
             this.productService.saveProduct(this.product)
                 .subscribe(function () { return _this.onSaveComplete(_this.product.productName + " was saved"); }, function (error) { return _this.errorMessage = error; });
         }
@@ -68,6 +77,20 @@ var ProductEditComponent = (function () {
             this.messageService.addMessage(message);
         }
         this.router.navigate(['/products']);
+    };
+    ProductEditComponent.prototype.validate = function () {
+        // Clear the validation object
+        this.dataIsValid = {};
+        // info tab
+        if (this.product.productName && this.product.productName.length >= 3 && this.product.productCode)
+            this.dataIsValid['info'] = true;
+        else
+            this.dataIsValid['info'] = false;
+        // tags tab
+        if (this.product.category && this.product.category.length >= 3)
+            this.dataIsValid['tags'] = true;
+        else
+            this.dataIsValid['tags'] = false;
     };
     return ProductEditComponent;
 }());
