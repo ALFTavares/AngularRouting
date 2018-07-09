@@ -9,20 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var product_service_1 = require("./product.service");
 var router_1 = require("@angular/router");
 var ProductDetailComponent = (function () {
-    function ProductDetailComponent(productService, route) {
-        this.productService = productService;
+    function ProductDetailComponent(route) {
         this.route = route;
         this.pageTitle = 'Product Detail';
     }
     ProductDetailComponent.prototype.ngOnInit = function () {
-        this.getProduct(+this.route.snapshot.params['id']);
-    };
-    ProductDetailComponent.prototype.getProduct = function (id) {
-        var _this = this;
-        this.productService.getProduct(id).subscribe(function (product) { return _this.product = product; }, function (error) { return _this.errorMessage = error; });
+        this.product = this.route.snapshot.data['product'];
     };
     return ProductDetailComponent;
 }());
@@ -30,8 +24,7 @@ ProductDetailComponent = __decorate([
     core_1.Component({
         templateUrl: './app/products/product-detail.component.html'
     }),
-    __metadata("design:paramtypes", [product_service_1.ProductService,
-        router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute])
 ], ProductDetailComponent);
 exports.ProductDetailComponent = ProductDetailComponent;
 //# sourceMappingURL=product-detail.component.js.map

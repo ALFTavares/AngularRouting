@@ -22,7 +22,9 @@ var ProductEditComponent = (function () {
     }
     ProductEditComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.route.params.subscribe(function (params) { return _this.getProduct(+params['id']); });
+        this.route.data.subscribe(function (data) {
+            _this.onProductRetrieved(data['product']);
+        });
     };
     ProductEditComponent.prototype.getProduct = function (id) {
         var _this = this;
