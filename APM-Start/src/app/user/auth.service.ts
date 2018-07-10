@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 @Injectable()
 export class AuthService {
     currentUser: IUser;
+    redirectUrl: string;
 
     constructor(private messageService: MessageService,
                 private router: Router) { }

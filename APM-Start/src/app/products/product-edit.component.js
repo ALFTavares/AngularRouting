@@ -20,6 +20,25 @@ var ProductEditComponent = (function () {
         this.router = router;
         this.pageTitle = 'Product Edit';
     }
+    Object.defineProperty(ProductEditComponent.prototype, "product", {
+        get: function () {
+            return this.currentProduct;
+        },
+        set: function (value) {
+            this.currentProduct = value;
+            // Clone the object to retain a copy
+            this.originalProduct = Object.assign({}, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductEditComponent.prototype, "isDirty", {
+        get: function () {
+            return JSON.stringify(this.originalProduct) !== JSON.stringify(this.currentProduct);
+        },
+        enumerable: true,
+        configurable: true
+    });
     ProductEditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.data.subscribe(function (data) {
@@ -62,6 +81,11 @@ var ProductEditComponent = (function () {
             return _this.dataIsValid[d] === true;
         }));
     };
+    ProductEditComponent.prototype.reset = function () {
+        this.dataIsValid = null;
+        this.currentProduct = null;
+        this.originalProduct = null;
+    };
     ProductEditComponent.prototype.saveProduct = function () {
         var _this = this;
         if (this.isValid(null)) {
@@ -76,6 +100,7 @@ var ProductEditComponent = (function () {
         if (message) {
             this.messageService.addMessage(message);
         }
+        this.reset();
         this.router.navigate(['/products']);
     };
     ProductEditComponent.prototype.validate = function () {
