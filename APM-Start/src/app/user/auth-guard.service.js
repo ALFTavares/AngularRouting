@@ -26,6 +26,9 @@ var AuthGuard = (function () {
         this.router.navigate(['/login']);
         return false;
     };
+    AuthGuard.prototype.canLoad = function (route) {
+        return this.checkLoggedIn(route.path);
+    };
     return AuthGuard;
 }());
 AuthGuard = __decorate([

@@ -1,21 +1,25 @@
 import {NgModule} from "@angular/core";
-import {CanActivate, RouterModule} from "@angular/router";
+import {CanActivate, PreloadAllModules, RouterModule} from "@angular/router";
 import {WelcomeComponent} from "./home/welcome.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {AuthGuard} from "./user/auth-guard.service";
+import {SelectiveStrategy} from "./selective-strategy.service";
 
 const ROUTES = [
-    { path: "products", loadChildren: "./products/products.module#ProductModule", CanActivate: [AuthGuard] },
-    { path: "welcome", component: WelcomeComponent },
-    { path: "", redirectTo: "welcome", pathMatch: "full" },
-    { path: "**", component: PageNotFoundComponent }
+    {path: "products", canActivate: [AuthGuard], data: {preload: false}, loadChildren: "app/products/product.module#ProductModule"},
+    {path: "welcome", component: WelcomeComponent},
+    {path: "", redirectTo: "welcome", pathMatch: "full"},
+    {path: "**", component: PageNotFoundComponent}
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(ROUTES)
+        RouterModule.forRoot(ROUTES,
+            {enableTracing: true, preloadingStrategy: SelectiveStrategy}
+        )
     ],
-    exports: [ RouterModule ]
+    providers: [SelectiveStrategy],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 
